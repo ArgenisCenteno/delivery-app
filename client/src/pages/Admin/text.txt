@@ -1,0 +1,16 @@
+  const columns = [
+   
+    {
+      title: 'ID Orden',
+      dataIndex: '_id',
+    },
+    {
+      title: 'Fecha',
+      dataIndex: 'createdAt',
+    },
+    {
+      title: 'Total',
+      dataIndex: 'total',
+    },
+   
+  ];

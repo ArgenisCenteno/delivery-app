@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/static/css/main.19b0e6d4.css",
+    "main.js": "/static/js/main.7fc98edf.js",
+    "static/js/547.89ede78c.chunk.js": "/static/js/547.89ede78c.chunk.js",
+    "static/js/607.24029085.chunk.js": "/static/js/607.24029085.chunk.js",
+    "static/js/177.d06a4d46.chunk.js": "/static/js/177.d06a4d46.chunk.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
+    "static/media/registrar.jpg": "/static/media/registrar.785854c7ba37a31b03d2.jpg",
+    "static/media/logo192.png": "/static/media/logo192.583c1b7426f176243ddf.png",
+    "static/media/alibal-logo.png": "/static/media/alibal-logo.bc476267bc4e31827f4f.png",
+    "static/media/la-ola-de-cocacola.png": "/static/media/la-ola-de-cocacola.b5174268dff29a9e0037.png",
+    "static/media/iniciar.webp": "/static/media/iniciar.973d7b80da6101d7e712.webp",
+    "static/media/login.png": "/static/media/login.178c1fcda522b382a282.png",
+    "static/media/polar.png": "/static/media/polar.50cc2581b4bb378781fe.png",
+    "static/media/registro.png": "/static/media/registro.5a4341735d324306d5b7.png",
+    "static/media/la-lucha-logo.png": "/static/media/la-lucha-logo.8d4d11795a68ffda92d9.png",
+    "static/media/revicons.eot": "/static/media/revicons.a77de540a38981833f9e.eot",
+    "static/media/revicons.ttf": "/static/media/revicons.57fd05d4ae650374c8de.ttf",
+    "static/media/mary-logo.png": "/static/media/mary-logo.d042b32bd9cd753dcf58.png",
+    "static/media/plumrose.svg": "/static/media/plumrose.d2396b5d650aa4a1dba02249dc4e55ca.svg",
+    "static/media/revicons.woff": "/static/media/revicons.e8746a624ed098489406.woff",
+    "static/media/image1.svg": "/static/media/image1.b92ea38e8fb1993300c6028d60f6df90.svg",
+    "index.html": "/index.html",
+    "main.19b0e6d4.css.map": "/static/css/main.19b0e6d4.css.map",
+    "main.7fc98edf.js.map": "/static/js/main.7fc98edf.js.map",
+    "547.89ede78c.chunk.js.map": "/static/js/547.89ede78c.chunk.js.map",
+    "607.24029085.chunk.js.map": "/static/js/607.24029085.chunk.js.map",
+    "177.d06a4d46.chunk.js.map": "/static/js/177.d06a4d46.chunk.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.19b0e6d4.css",
+    "static/js/main.7fc98edf.js"
+  ]
+}

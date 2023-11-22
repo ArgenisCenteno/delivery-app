@@ -29,6 +29,11 @@ import NewPassword from "./pages/Auth/NewPassword";
 import PasswordUpdate from "./pages/user/PasswordUpdate";
 import Gender from "./pages/Gender";
 import SalesReport from "./pages/SalesReport";
+import CategoryCreate from "./pages/Admin/CategoryCreate";
+import CategoryUpdate from "./pages/Admin/CategoryUpdate";
+import Providers from "./pages/Admin/Providers";
+import CreateProvider from "./pages/Admin/CreateProvider";
+import ProviderUpdate from "./pages/Admin/ProviderUpdate";
 
 function App() {
   return (
@@ -67,6 +72,11 @@ function App() {
           <Route path="admin/orders" element={<AdminOrders />} />
           <Route path="admin/sales-report" element={<SalesReport />} />
           <Route path="admin/order/:_id" element={<AdminOrder />} />
+          <Route path="admin/createCategory" element={<CategoryCreate />} />
+          <Route path="admin/updateCategory/:id" element={<CategoryUpdate />} />
+          <Route path="admin/providers" element={<Providers />} />
+          <Route path="admin/create-provider" element={<CreateProvider/>} />
+          <Route path="admin/update-provider/:id" element={<ProviderUpdate />} />
         </Route>
 
         {/* Rutas de autenticación */}

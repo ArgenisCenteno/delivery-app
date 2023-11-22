@@ -35,6 +35,11 @@ const productSchema = new mongoose.Schema(
       ref: "Categoria",
       required: true,
     },  
+    proveedor: {
+      type: mongoose.ObjectId,
+      ref: "Proveedor",
+      required: true,
+    },  
     imagen: {
       type: String,  
       required: true, 

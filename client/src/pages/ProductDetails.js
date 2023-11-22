@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import Layout from "./../components/Layout/Layout";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useCart } from "../context/cart"; 
 import "../styles/ProductDetails.css"
+import WhatsAppIcon from '@mui/icons-material/WhatsApp'; 
 
 const ProductDetails = () => {
   const [cart, setCart] = useCart();
@@ -76,6 +77,9 @@ const ProductDetails = () => {
 
   return (
     <Layout>
+       <a href="https://api.whatsapp.com/send?phone=+51987654321" class="btn-wsp" target="_blank">
+	    <WhatsAppIcon style={{fontSize: "64px"}}/>
+	</a>
       <div className="d-flex justify-content-center p-3 align-content-center align-items-center row   product-details boxShadowInfo">
       <div className="col-md-4 col-sm-4">
         {product._id ? (
@@ -101,7 +105,8 @@ const ProductDetails = () => {
           <div> 
            
                
-            <h2  text-muted>Bs {product.precio}</h2>
+            <h2  text-muted>USD {product.precio}</h2>
+            <h3  text-muted>BS {product.precio * 35.53}</h3>
            
    
      <div className="col-6 col-sm-6 d-flex align-items-center mb-4">
@@ -146,37 +151,31 @@ const ProductDetails = () => {
       </div>
       <hr />
       <div className="d-flex justify-content-center  align-content-center align-items-center  row   similar-products">
-          <h4 className="text-success ml-2">Quizás te pueda interesar</h4>
+          <h2 className="text-success mt-4 mb-4  text-center">Quizás te pueda interesar</h2>
         {relatedProducts.length < 1 && (
           <p className="text-center">Sin productos similares</p>
         )}
        
-        <div className="d-flex flex-wrap">
+        <div className="d-flex flex-wrap justify-content-center mt-4 mb-4  ">
          
           {relatedProducts?.map((p) => (
-
-            <div className="card m-2" key={p._id}>
-
+            <Link to={`/product/${p.codigo}`}  style={{textDecoration: "none"}}>
+            <div className="card m-3 boxShadow" key={p._id}>
               <img
                 src={`/api/v1/product/product-photo/${p._id}`}
                 className="card-img-top"
-                alt={p.name}
+                alt={p.nombre}
               />
               <div className="card-body">
                 <div className="card-name-price">
-                  <h5 className="card-title">{p.nombre}</h5>
-                </div>
-                 
-                <div className="card-name-price">
-                  <button
-                    className="btn btn-info ms-1 verDetalles"
-                    onClick={() => navigate(`/product/${p.slug}`)}
-                  >
-                    Ver más
-                  </button>
-                </div>
+                  <h5 className="text-black " >{p.nombre}</h5>
+                </div> 
+                <h5 className="text-success" >USD {p.precio}</h5>
+
               </div>
             </div>
+            </Link>
+            
           ))}
         </div>
       </div>

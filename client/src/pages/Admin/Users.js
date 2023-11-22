@@ -1,34 +1,54 @@
 import React, { useState, useEffect } from "react";
-import { Table, Input, Button, Space } from "antd";
+import { Table, Input, Button, Space, Select, message } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import AdminMenu from "../../components/Layout/AdminMenu";
 import Layout from "./../../components/Layout/Layout";
 import axios from "axios";
+
+const { Option } = Select;
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
+  const [roleOptions, setRoleOptions] = useState([]);
+  const [selectedRole, setSelectedRole] = useState("");
 
+  const getUsers = async () => {
+    try {
+      const response = await axios.get("/api/v1/auth/all-users");
+      setUsers(response.data.users);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
   useEffect(() => {
-    // Obtener los usuarios del servidor
-    const getUsers = async () => {
-      try {
-        const response = await axios.get("/api/v1/auth/all-users");
-        setUsers(response.data.users);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      }
-    };
+   
 
     getUsers();
+ 
   }, []);
 
-  
-  // Función para configurar el filtro de búsqueda para cada columna
+ 
+
+  const handleRoleChange = async (userId, newRole) => {
+    try {
+      await axios.patch(`/api/v1/auth/user/${userId}/change-role`, {
+        role: newRole,
+      });
+      // Actualizar la lista de usuarios después de cambiar el rol
+      getUsers()
+      
+      message.success("Rol actualizado exitosamente");
+    } catch (error) {
+      console.log("Error updating user role", error);
+      message.error("Error al actualizar el rol del usuario");
+    }
+  };
+
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
       <div style={{ padding: 8 }}>
@@ -73,48 +93,59 @@ const Users = () => {
         : "",
   });
 
-  // Función para manejar la búsqueda
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
     setSearchedColumn(dataIndex);
   };
 
-  // Función para limpiar el filtro de búsqueda
   const handleReset = (clearFilters, dataIndex) => {
     clearFilters();
     setSearchText("");
   };
 
-    // Columnas de la tabla
   const columns = [
     {
       title: "Nombre",
       dataIndex: "name",
       key: "name",
-      // Configuración del filtro de búsqueda
       ...getColumnSearchProps("name"),
     },
     {
       title: "Correo electrónico",
       dataIndex: "email",
       key: "email",
-      // Configuración del filtro de búsqueda
       ...getColumnSearchProps("email"),
     },
- 
     {
       title: "Telefono",
       dataIndex: "phone",
       key: "phone",
-      // Configuración del filtro de búsqueda
       ...getColumnSearchProps("phone"),
     },
     {
       title: "Rol",
       dataIndex: "role",
       key: "role",
-      render: (role) => <span>{role === 0 ? "Cliente" : "Administrador"}</span>,
+      render: (role, record) => (
+        <Select
+          style={{ width: 120 }}
+          value={role}
+          onChange={(value) => handleRoleChange(record._id, value)}
+        >
+           
+            <Option   value={0} >
+              Cliente
+            </Option>
+            <Option   value={1}>
+              Admin 
+            </Option>
+            <Option   value={2}>
+              Vendedor 
+            </Option>
+         
+        </Select>
+      ),
     },
   ];
 
@@ -127,12 +158,7 @@ const Users = () => {
           </div>
           <div className="col-md-9">
             <h1 className="mt-4 mb-4">Usuarios</h1>
-            <Table
-              columns={columns}
-              dataSource={users}
-              loading={loading}
-              rowKey="_id"
-            />
+            <Table columns={columns} dataSource={users} loading={loading} rowKey="_id" />
           </div>
         </div>
       </div>

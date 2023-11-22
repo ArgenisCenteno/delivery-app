@@ -46,7 +46,7 @@ const AdminDashboard = () => {
 
   return (
     <Layout title={"Por todo Delivery"}>
-      <div className="container-fluid   p-3 dashboard admin-panel">
+      <div className=" ">
         <div className="row">
           <div className="col-md-3 ">
             <AdminMenu  />
@@ -82,13 +82,32 @@ const AdminDashboard = () => {
               </div>
               <div className="col-md-3 mt-3">
                 <div className="card" style={{border: "none", borderRadius: "12px"}}>
-                  <div className="card-body   bg-danger  text-white" style={{borderRadius: "12px"}}>
+                  <div className="card-body   bg-warning  text-white" style={{borderRadius: "12px"}}>
                     <h5 className="card-title text-white">Usuarios</h5>
                     <p className="card-text text-white">{totalUsers}</p>
                     <PeopleAltIcon/>
                   </div>
                 </div>
               </div>
+              <div className="col-md-3 mt-3">
+                <div className="card" style={{border: "none", borderRadius: "12px"}}>
+                  <div className="card-body  bg-secondary" style={{borderRadius: "12px"}}>
+                    <h5 className="card-title">Proveedores</h5>
+                    <p className="card-text">{totalCategories}</p>
+                    <LoyaltyIcon/>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-3 mt-3">
+                <div className="card" style={{border: "none", borderRadius: "12px"}}>
+                  <div className="card-body  bg-primary" style={{borderRadius: "12px"}}>
+                    <h5 className="card-title">Dolar</h5>
+                    <p className="card-text">35.53</p>
+                    <LoyaltyIcon/>
+                  </div>
+                </div>
+              </div>
+              
              
             </div>
            

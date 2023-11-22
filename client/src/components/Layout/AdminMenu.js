@@ -33,7 +33,7 @@ const AdminMenu = () => {
             Categoría
           </NavLink> 
           <NavLink
-            to="/dashboard/admin/create-category"
+            to="/dashboard/admin/providers"
             className="list-group-item list-group-item-action"
           >
             Proveedores

@@ -113,13 +113,13 @@ const UpdateProduct = () => {
 
   return (
     <Layout title={"Actualizar Producto"}>
-    <div className="container-fluid p-3">
+    <div className=" ">
       <div className="row">
         <div className="col-md-3">
           <AdminMenu />
         </div>
         <div className="col-md-9">
-<h1>Registrar Producto</h1>
+<h1 className="mt-4">Actualizar Producto</h1>
 <div className="row  pt-3 pb-3  mb-3" style={{backgroundColor: "#eee", borderRadius: "12px"}}>
  
   <div className="col-md-6">

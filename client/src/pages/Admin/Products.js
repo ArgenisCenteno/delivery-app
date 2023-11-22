@@ -13,7 +13,7 @@ const Products = () => {
   const [loading, setLoading] = useState(false);
   const [pagination, setPagination] = useState({
     current: 1,
-    pageSize: 10,
+    pageSize: 4,
   });
  
   // Obtener todos los productos

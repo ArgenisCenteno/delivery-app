@@ -1,4 +1,4 @@
-import {useState} from "react";
+ 
 import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import toast from "react-hot-toast";
@@ -11,8 +11,11 @@ import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
 import {FaUserCog} from "react-icons/fa"
 import ReactModal from "react-modal";
+import axios from "axios"
+import { useState, useEffect } from "react";
 
 const formatUserName = (name) => {
+  
   const namesArray = name.split(" ");
   if (namesArray.length === 4) {
     // Si tiene dos nombres y dos apellidos, mostrar primer nombre y segundo apellido
@@ -29,7 +32,23 @@ const Header = () => {
   const [buscar, setBuscar] = useState("")
   const [cart] = useCart();
   const categories = useCategory();
+  const [categorias, setCategories] = useState([]);
 
+  const getAllCategory = async () => {
+    try {
+      const { data } = await axios.get("/api/v1/category/get-category");
+      if (data?.success) {
+        setCategories(data?.category);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Ha ocurrido un error al crear la categoria");
+    }
+  };
+
+  useEffect(() => {
+    getAllCategory();
+  }, []);
   // CERRAR SESION
   const handleLogout = () => {
     setAuth({
@@ -40,11 +59,6 @@ const Header = () => {
     localStorage.removeItem("auth");
     toast.success("Sesion cerrada");
   };
-
-  const viveres = "viveres"
-  const refrigerados ="refrigerados"
-  const bebidas = "bebidas"
-  const frutasVegetales = "frutas-y-vegetales"
  
 
   return (
@@ -85,26 +99,18 @@ const Header = () => {
               Buscar
               </button>
               </li>
-              <li className="nav-item  ">
-              <Link to={`/category/${viveres}`} className="nav-link">
-              Víveres
+
+              {categorias.map((category, index) =>(
+              <li className="nav-item  "> 
+              <Link to={`/category/${category.codigo}`} className="nav-link">
+              {category.nombre}
               </Link>
               </li>
-              <li className="nav-item  ">
-              <Link to={`/category/${refrigerados}`}  className="nav-link">
-              Refrigerados
-              </Link>
-              </li>
-              <li className="nav-item  ">
-              <Link to={`/category/${frutasVegetales}`} className="nav-link">
-              Frutas y Vegetales
-              </Link>
-              </li>
-              <li className="nav-item  ">
-              <Link to={`/category/${bebidas}`}  className="nav-link">
-              Bebidas
-              </Link>
-              </li>
+              ) 
+              )
+              }
+             
+               
               
              
               {/*<li className="nav-item dropdown">
@@ -235,7 +241,7 @@ const Header = () => {
                   backgroundColor: "rgba(0, 0, 0, 0.5)",
                 },
                 content: {
-                  top: "50%",
+                  top: "60%",
                   left: "50%",
                   right: "auto",
                   bottom: "auto",
@@ -244,8 +250,8 @@ const Header = () => {
                   borderRadius: "5px",
                   boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)",
                   padding: "20px",
-                  width: "420px",
-                  height: "220px"
+                  width: "364px",
+                  height: "220px", 
                 },
               }}
             >

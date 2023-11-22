@@ -84,96 +84,105 @@ const AdminOrder = () => {
   return (
     <Layout title={"Orden"}>
     <div className="cart-page">
-    <div className="row pt-20">
-          
-        </div>
+      <div className="row pt-20"></div>
 
       <div className="container" style={{ marginTop: "22px", paddingBottom: "22px" }}>
         <div className="row pb-4">
-        <div className="col-lg-8 mb-4 pb-4">
-          <h2 style={{backgroundColor: "#eee", borderRadius: "8px", padding: "12px"}}>Código: {orderData?.order?._id}</h2>  
-            <h3>Productos pedidos:</h3>
-            {orderData?.order?.productos?.map((p, index) => (
-            <div className="card mb-3" key={index} style={{backgroundColor: "#eee", borderRadius: "8px", padding: "12px"}}>
-              <div className="card-body">
-                <div className="d-flex justify-content-between">
-                  <div className="d-flex flex-row align-items-center">
-                    <div>
-                      <img
-                        src={`/api/v1/product/product-photo/${p._id}`}
-                        className="img-fluid rounded-3"
-                        alt="Shopping item"
-                        style={{ width: '90px' }}
-                      />
-                    </div>
-                    <div className="ms-3">
-                      <h5>{p.nombre}</h5>
-                       <p>{p.descripcion}</p>
-                    </div>
-                  </div>
-                  <div className="d-flex flex-row align-items-center">
-                    <div style={{ width: '50px' }}>
-                      <h5 className="fw-normal mb-0">{p.quantity}</h5>
-                    </div>
-                    <div style={{ width: '80px' }}>
-                      <h5 className="mb-0">Bs {p.precio}</h5>
-                    </div>
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-
-          </div>
-
-          <div className="col-lg-4 cart-summary text-center" style={{backgroundColor: "#eee", borderRadius: "12px", paddingTop: "12px", paddingBottom: "12px"}}>
-            <h2>Resumen de pago</h2> 
-            <hr />
-            {/* Show the total amount of the order */}
-            <h2  >Total: {orderData?.order?.total?.toFixed(2)} Bs</h2>
-            <h5 >Subtotal: {orderData?.order?.subtotal?.toFixed(2)} Bs</h5>
-            <h5  >Costo:  {orderData?.order?.direccion.costo} Bs</h5>
-            <hr />
-
-            {/* Show the address details if available */}
-            {orderData?.order?.direccion && (
-  <>
-    <div className="mb-3">
-      <h4>
-        <strong>Dirección de entrega</strong>
-      </h4>
-      <hr />
-      <h5>
-        <strong>Municipio:</strong> {orderData?.order?.direccion?.municipio}
-      </h5>
-      <h5>
-        <strong>Parroquia:</strong> {orderData?.order?.direccion?.parroquia}
-      </h5>
-      <h5>
-        <strong>Zona:</strong> {orderData?.order?.direccion?.zona}
-      </h5>
-      <h5>
-        <strong>Calle:</strong> {orderData?.order?.direccion?.calle}
-      </h5>
-      <h5>
-        <strong>Casa:</strong> {orderData?.order?.direccion?.casa}
-      </h5>
-      <h5>
-        <strong>Indicaciones:</strong> {orderData?.order?.direccion?.indicaciones}
-      </h5>
-       
-      <hr />
-      
-    </div>
-  </>
-)}
-    <div className="mb-3">
-      <h4>
-        <strong>Estado de Entrega</strong>
-      </h4>
-      <hr />
-      <h5 style={{color: "#059669"}}>
+        <div className="col-lg-5">
+                    <div className="card bg-success text-white rounded-3">
+                      {orderData?.order?.estadoPago ? (
+                        <h2 className="text-center text-white p-4 m-0" style={{ borderRadius: "6px" }}>
+                          <strong>¡Orden Pagada!</strong>
+                        </h2>
+                      ) : (
+                        <h2 className="text-center text-white bg-danger p-4 m-0" style={{ borderRadius: "9px" }}>
+                          <strong>Orden sin pagar</strong>
+                        </h2>
+                      )}
+  
+                      <hr className="my-4" />
+                      <div className="card-body">
+                        <div className="d-flex justify-content-between align-items-center mb-4">
+                          <h5 className="mb-0">Información de compra</h5>
+                          <img
+                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
+                            className="img-fluid rounded-3"
+                            style={{ width: '45px' }}
+                            alt="Avatar"
+                          />
+                        </div> 
+  
+                        <form className="mt-4">
+                          <div className="d-flex justify-content-between">
+                            <p className="mb-2">ID</p>
+                            <p className="mb-2">{orderData?.order?._id}</p>
+                          </div>
+                          <div className="d-flex justify-content-between">
+                            <p className="mb-2">Municipio</p>
+                            <p className="mb-2">{orderData?.order?.direccion?.municipio}</p>
+                          </div>
+                          <div className="d-flex justify-content-between">
+                            <p className="mb-2">Parroquia</p>
+                            <p className="mb-2">{orderData?.order?.direccion?.parroquia}</p>
+                          </div>
+                          <div className="d-flex justify-content-between">
+                            <p className="mb-2">Zona</p>
+                            <p className="mb-2">{orderData?.order?.direccion?.zona}</p>
+                          </div>
+                          <div className="d-flex justify-content-between">
+                            <p className="mb-2">Calle</p>
+                            <p className="mb-2">{orderData?.order?.direccion?.calle}</p>
+                          </div>
+                          <div className="d-flex justify-content-between">
+                            <p className="mb-2">Casa</p>
+                            <p className="mb-2">{orderData?.order?.direccion?.casa}</p>
+                          </div>
+                          <div className="d-flex justify-content-between">
+                            <p className="mb-2">Indicaciones</p>
+                            <p className="mb-2">{orderData?.order?.direccion?.indicaciones}</p>
+                          </div>
+                        </form>
+                        <hr className="my-4" />
+                        <div className="d-flex justify-content-between">
+                          <p className="mb-2">Subtotal</p>
+                          <p className="mb-2">USD {orderData?.order?.subtotal}   </p>
+                        </div>
+                        <div className="d-flex justify-content-between">
+                          <p className="mb-2">IVA</p>
+                          <p className="mb-2">16%</p>
+                        </div>
+                        <div className="d-flex justify-content-between">
+                          <p className="mb-2">Delivery</p>
+                          <p className="mb-2">USD  {orderData?.order?.direccion?.costo} </p>
+                        </div>
+                        <div className="d-flex justify-content-between mb-4">
+                          <p className="mb-2">Total en Dolares</p>
+                          <p className="mb-2">USD {orderData?.order?.total} </p>
+                        </div>
+                        <div className="d-flex justify-content-between mb-4">
+                          <p className="mb-2">Total en Boívares</p>
+                          <p className="mb-2">BS {Number(orderData?.order?.total) / 35.53} </p>
+                        </div>
+                        { orderData?.order?.pago ? (
+                          <>
+                          <div className="d-flex justify-content-between mb-4">
+                           <p className="mb-2">Metodo de pago </p>
+                           <p className="mb-2">{orderData?.order?.pago.paymentMethod}</p>
+                         </div>
+                         <div className="d-flex justify-content-between mb-4">
+                           <p className="mb-2">Código de transacción </p>
+                           <p className="mb-2">{orderData?.order?.pago.transactionId}</p>
+                         </div>
+                          </>
+                        ):(
+                          <div className="d-flex justify-content-between mb-4">
+                          <p className="mb-2">No se ha pagado</p>
+                          <p className="mb-2"> </p>
+                        </div>
+                        )
+                           
+                        }
+                        <h5  >
         {orderData?.order?.estadoEntrega}
       </h5>
       <Select
@@ -188,52 +197,106 @@ const AdminOrder = () => {
             </Option>
           ))}
         </Select>
-      <h4>
-      <hr />
-  <strong>Estado de Pago</strong>
-</h4>
- 
-{orderData?.order?.estadoPago ? (
- <>
-  <h5 className="btn btn-success">
-     Orden Pagada 
-  </h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-7">
+                    {orderData?.order?.estadoPago ? (
+                      <h5 className=" mb-3">Detalles de la orden</h5>
+                    ) : (
+                      <h5>Detalles de la orden</h5>
+                    )}
+                    <hr />
+                    <div className="d-flex justify-content-between align-items-center mb-4">
+                      <div>
+                        <p className="mb-0">Tiene {orderData?.order?.productos?.length} productos!</p>
+                      </div>
+                    </div>
+                    {orderData?.order?.productos?.map((p, index) => (
+                      <div className="card mb-3" key={index}>
+                        <div className="card-body">
+                          <div className="d-flex justify-content-between">
+                            <div className="d-flex flex-row align-items-center">
+                              <div>
+                                <img
+                                  src={`/api/v1/product/product-photo/${p._id}`}
+                                  className="img-fluid rounded-3"
+                                  alt="Shopping item"
+                                  style={{ width: '65px' }}
+                                />
+                              </div>
+                              <div className="ms-2">
+                                <h5>{p.nombre}</h5>
+                                <p className="small mb-0">{p.descripcion}</p>
+                              </div>
+                            </div>
+                            <div className="d-flex flex-row align-items-center">
+                              <div style={{ width: '60px' }}>
+                                <h5 className="fw-normal mb-0 ml-2">{p.quantity}</h5>
+                              </div>
+                              <div style={{ width: '70px' }}>
+                                <h5 className="mb-0 ml-3">Bs {p.precio}</h5>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                    <hr className="my-4" />
+                    {loading ? (
+                        <h2 className="text-center">Cargando...</h2>
+                      ):
+                         orderData?.order?.estadoPago ? (
+                          <h2 className="text-center "  > <strong>Esta orden fue pagada</strong> </h2>
+                        ) : (
+                          <>
+                            <div className="mt-2 text-muted">
+                              <h5 className="text-center  " >  <strong>Seleccione un metodo de pago</strong> </h5>
+                              {orderData?.order?.total && (
+                                  <button type="success" className=" btn btn-warning mt-2 p-2" onClick={() => setShowModal(true)}>
+                                  Completar pago
+                             </button>
+                              ) } 
+                               
+                            </div>
+                          </>
+                        )} 
+                  </div>
 
-  <h5>Metodo de pago: {orderData?.order?.pago.paymentMethod}</h5>
-  <h5>Código de pago: {orderData?.order?.pago.transactionId}</h5>
- </>
-) : (
-  <h5  >
-    <p className="btn btn-danger"> Orden Sin Pagar</p> <br/> 
-     <button type="success" className=" btn btn-warning mt-2 p-2" onClick={() => setShowModal(true)}>
-          Completar pago
-     </button>
-  </h5>
-)}
-    </div>
-          </div>
+         
         </div>
       </div>
     </div>
     <Modal
-        title="Confirmar pago"
-        open={showModal}
-        onOk={handleMarkAsPaid}
-        onCancel={() => setShowModal(false)}
-        okText="Confirmar"
-        cancelText="Cancelar"
-      >
-        <h4>Completar pago de orden</h4>
-        <form>
-  <select className="form-control mb-4" value={metodoPago} name="metodoPago"onChange={(e) => setMetodoPago(e.target.value)}
-           >
-    <option value="Pago-Movil">Pago móvil</option>
-    <option value="Transferencia">Trasnferencia</option>
-    <option value="Punto de venta">Punto de venta</option>
-  </select>
-  <input type="text" className="form-control mb-4" value={codigo} name="codigo" onChange={(e) => setCodigo(e.target.value)} placeholder="Codigo de transacción" />
-</form>
-      </Modal>
+      title="Confirmar pago"
+      open={showModal}
+      onOk={handleMarkAsPaid}
+      onCancel={() => setShowModal(false)}
+      okText="Confirmar"
+      cancelText="Cancelar"
+    >
+      <h4>Completar pago de orden</h4>
+      <form>
+        <select
+          className="form-control mb-4"
+          value={metodoPago}
+          name="metodoPago"
+          onChange={(e) => setMetodoPago(e.target.value)}
+        >
+          <option value="Pago-Movil">Pago móvil</option>
+          <option value="Transferencia">Trasnferencia</option>
+          <option value="Punto de venta">Punto de venta</option>
+        </select>
+        <input
+          type="text"
+          className="form-control mb-4"
+          value={codigo}
+          name="codigo"
+          onChange={(e) => setCodigo(e.target.value)}
+          placeholder="Codigo de transacción"
+        />
+      </form>
+    </Modal>
   </Layout>
   
 

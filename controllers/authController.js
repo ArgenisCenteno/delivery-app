@@ -498,3 +498,31 @@ export const resetPasswordController = async (req, res) => {
     });
   }
 };
+
+
+export const changeUserRole = async (req, res) => {
+  const { userId } = req.params;
+  const { role } = req.body;
+
+  try {
+    // Verificar si el usuario existe
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    // Verificar que el nuevo rol sea válido (0 para cliente, 1 para administrador)
+    if (![0, 1, 2].includes(role)) {
+      return res.status(400).json({ error: "Rol no válido" });
+    }
+
+    // Actualizar el rol del usuario
+    user.role = role;
+    await user.save();
+
+    res.json({ message: "Rol de usuario actualizado exitosamente" });
+  } catch (error) {
+    console.error("Error al cambiar el rol de usuario", error);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+};

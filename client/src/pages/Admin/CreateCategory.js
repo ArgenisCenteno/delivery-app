@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import Layout from "./../../components/Layout/Layout";
 import AdminMenu from "./../../components/Layout/AdminMenu";
 import toast from "react-hot-toast";
-import axios from "axios";
-import CategoryForm from "../../components/Form/CategoryForm";
-import ReactModal from "react-modal";
-import CategoryUpdate from "../../components/Form/CategoryUpdate";
+import axios from "axios"; 
 import { Table } from "antd";
+import { Link } from "react-router-dom";
+import { Image } from "react-bootstrap-icons";
 
 const CreateCategory = () => {
   const [categories, setCategories] = useState([]);
@@ -103,23 +102,36 @@ const CreateCategory = () => {
         key: "codigo",
  
       },
-   
+      {
+        title: "Descripción",
+        dataIndex: "codigo",
+        key: "codigo",
+ 
+      },
+      {
+        title: "Código",
+        dataIndex: "codigo",
+        key: "codigo",
+        render: (imagen, record) => (
+          <>
+          <img src={`/api/v1/category/category-photo/${record._id}`} height="100px" className="card-img-top-dashboard" alt={record.name} />
+    
+          </>
+        )
+      },
       
       {
         title: "Acciones", 
         key: "acciones",
         render: (record) => (
           <>
-          <button
+          <Link
+          to={`/dashboard/admin/updateCategory/${record._id} `}
         className="btn btn-success ms-2"
-        onClick={() => {
-          setVisible(true);
-          setUpdatedName(record.name);
-          setSelected(record);
-        }}
+        
       >
         Editar
-      </button>
+      </Link>
       <button
         className="btn btn-danger ms-2"
         onClick={() => {
@@ -144,75 +156,17 @@ const CreateCategory = () => {
           <div className="col-md-9">
             <h1 className="mt-4 mb-4">Categorias</h1>
             <div className="p-3 w-50">
-             <button className="btn btn-primary " onClick={() => {
-                          setVisibleCreate(true); ;
-                        }}>Registrar categoria</button> 
+             <Link to={"/dashboard/admin/createCategory"} className="btn btn-primary "  >Registrar categoria</Link> 
              
             </div>
             <Table
               columns={columns}
+               rowKey={(record) => record._id} 
               dataSource={categories} 
-              rowKey="_id"
-            />
              
-
-            <ReactModal
-              isOpen={visible}
-              onRequestClose={() => setVisible(false)}
-              style={{
-                overlay: {
-                  backgroundColor: "rgba(0, 0, 0, 0.5)",
-                },
-                content: {
-                  top: "50%",
-                  left: "50%",
-                  right: "auto",
-                  bottom: "auto",
-                  marginRight: "-50%",
-                  transform: "translate(-50%, -50%)",
-                  borderRadius: "5px",
-                  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)",
-                  padding: "20px",
-                  width: "420px",
-                  height: "220px"
-                },
-              }}
-            >
-              <CategoryUpdate
-                value={updatedName}
-                setValue={setUpdatedName}
-                handleSubmit={handleUpdate}
-              />
-            </ReactModal>
-
-            <ReactModal
-              isOpen={visibleCreate}
-              onRequestClose={() => setVisibleCreate(false)}
-              style={{
-                overlay: {
-                  backgroundColor: "rgba(0, 0, 0, 0.5)",
-                },
-                content: {
-                  top: "50%",
-                  left: "50%",
-                  right: "auto",
-                  bottom: "auto",
-                  marginRight: "-50%",
-                  transform: "translate(-50%, -50%)",
-                  borderRadius: "5px",
-                  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)",
-                  padding: "20px",
-                  width: "420px",
-                  height: "220px"
-                },
-              }}
-            >
-              <CategoryForm
-               handleSubmit={handleSubmit}
-               value={name}
-               setValue={setName} 
-              />
-            </ReactModal>
+            />
+              
+            
           </div>
         </div>
       </div>

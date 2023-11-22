@@ -72,10 +72,9 @@
   }
   
   
-    .product-image {
-      margin-left: 10%;
+    .product-image { 
       height: auto;
-      width:  80%; /* Puedes ajustar el tamaño según tus preferencias */
+      width:  100%; /* Puedes ajustar el tamaño según tus preferencias */
     }
   }
   

@@ -17,6 +17,8 @@ const CreateProduct = () => {
   const [priceSale, setPriceSale] = useState("");
   const [category, setCategory] = useState(""); 
   const [photo, setPhoto] = useState(""); 
+  const [provider, setProvider] = useState([]); 
+  const [providerSelected, setProviderSelected] = useState(""); 
    
   const [formValid, setFormValid] = useState(false);
   
@@ -33,9 +35,21 @@ const CreateProduct = () => {
       toast.error("Ha ocurrido un error al consultar las categorias");
     }
   };
+  const getAllProvider= async () => {
+    try {
+      const { data } = await axios.get("/api/v1/provider/get-provider");
+      if (data?.success) {
+        setProvider(data?.category);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Ha ocurrido un error al traer el proveedor");
+    }
+  };
 
   useEffect(() => {
     getAllCategory();
+    getAllProvider();
   }, []);
 
    
@@ -47,6 +61,7 @@ const CreateProduct = () => {
       
       const productData = new FormData();
       productData.append("name", name);
+      productData.append("provider", providerSelected);
       productData.append("stock", stock);
       productData.append("price", price);
       productData.append("priceSale", priceSale);
@@ -72,13 +87,13 @@ const CreateProduct = () => {
   return (
     <Layout title={"Registrar Producto"}>
       <div className="">
-        <div className="row">
+        <div className="row ">
           <div className="col-md-3">
             <AdminMenu />
           </div>
           <div className="col-md-9">
-  <h1>Registrar Producto</h1>
-  <div className="row  pt-3 pb-3  mb-3" style={{backgroundColor: "#eee", borderRadius: "12px"}}>
+  <h1 className="mt-4">Registrar Producto</h1>
+  <div className="row  pt-3  pb-3  mb-3" style={{backgroundColor: "#eee", borderRadius: "12px"}}>
    
     <div className="col-md-6">
       <div className="mb-3">
@@ -175,6 +190,31 @@ const CreateProduct = () => {
           }}
         >
            {categories?.map((c) => (
+                  <Option key={c._id} value={c._id}>
+                    {c.nombre}
+                  </Option>
+                ))}
+        </Select>
+      </div>
+      
+    </div>
+
+    <div className="col-md-6">
+      <div className="mb-3">
+        <p>
+          <strong>Proveedor</strong>
+        </p>
+        <Select
+          bordered={false}
+          placeholder="Proveedor"
+          size="large"
+          showSearch
+          className="form-select mb-3"
+          onChange={(value) => {
+            setProviderSelected(value);
+          }}
+        >
+           {provider?.map((c) => (
                   <Option key={c._id} value={c._id}>
                     {c.nombre}
                   </Option>

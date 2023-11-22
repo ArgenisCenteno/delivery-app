@@ -3,10 +3,8 @@ import categoryModel from "../models/categoryModel.js";
 import orderModel from "../models/orderModel.js";
 
 import nodemailer from "nodemailer"
-import axios from "axios";
-import fs from "fs";
-import slugify from "slugify";
-import braintree from "braintree";
+import axios from "axios"; 
+import slugify from "slugify"; 
 import dotenv from "dotenv";
 import cloudinary from "cloudinary";
  
@@ -22,7 +20,7 @@ cloudinary.config({
 
 export const createProductController = async (req, res) => {
   try {
-    const { name, description, category, variations,  gender, price, priceSale, stock } =
+    const { name, description, category, variations,  provider, price, priceSale, stock } =
       req.fields;
     const { photo } = req.files;
     //VALIDACIONES
@@ -49,7 +47,7 @@ export const createProductController = async (req, res) => {
       use_filename: true, // Utilizar el nombre original del archivo
     });
      
-    const products = new productModel({ nombre: name, stock: stock, descripcion: description, categoria: category, precio: price, precioCompra: priceSale, codigo: slugify(name),  imagen: cloudinaryResult.secure_url});
+    const products = new productModel({ nombre: name, stock: stock, descripcion: description, categoria: category, precio: price, precioCompra: priceSale, codigo: slugify(name),  imagen: cloudinaryResult.secure_url, proveedor: provider});
     
     await products.save();
     res.status(201).send({

@@ -6,7 +6,7 @@ import "../styles/Homepage.css";
 import { Banner } from "../components/Layout/Banner.js";
 import Brands from "../components/Layout/Brands";
 import Categories from "../components/Layout/Categories";
- 
+import WhatsAppIcon from '@mui/icons-material/WhatsApp'; 
 
 const HomePage = () => { 
   const [products, setProducts] = useState([]);
@@ -68,6 +68,9 @@ const HomePage = () => {
   return (
     <>
       <Layout title={"Por todo Delivery"} >
+      <a href="https://api.whatsapp.com/send?phone=+51987654321" class="btn-wsp" target="_blank">
+	    <WhatsAppIcon style={{fontSize: "64px"}}/>
+	</a>
        <Banner/>
        <Brands/>
        <Categories/> 

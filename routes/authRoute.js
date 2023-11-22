@@ -17,7 +17,8 @@ import {
   getTotalProductsController,
   validateToken,
   resetPasswordController,
-  updatePasswordController
+  updatePasswordController,
+  changeUserRole
 
 } from "../controllers/authController.js";
 import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
@@ -83,6 +84,13 @@ router.put(
   requireSignIn,
   isAdmin,
   orderStatusPaidController
+);
+
+router.patch(
+  "/user/:userId/change-role",
+  requireSignIn,
+  isAdmin,
+  changeUserRole
 );
 
 router.get(

@@ -61,7 +61,7 @@ const CategoryProduct = () => {
             <div className="d-flex flex-wrap justify-content-center">
               {products?.map((p) => (
                 <Link to={`/product/${p.codigo}`}  style={{textDecoration: "none"}}>
-                <div className="card m-2 boxShadow" key={p._id}>
+                <div className="card m-3 boxShadow" key={p._id}>
                   <img
                     src={`/api/v1/product/product-photo/${p._id}`}
                     className="card-img-top"
@@ -69,9 +69,10 @@ const CategoryProduct = () => {
                   />
                   <div className="card-body">
                     <div className="card-name-price">
-                      <h5 className="text-black" >{p.nombre}</h5>
-                      <h5 className="text-success" >Bs {p.precio}</h5>
+                      <h5 className="text-black " >{p.nombre}</h5>
                     </div> 
+                    <h5 className="text-success" >USD {p.precio}</h5>
+
                   </div>
                 </div>
                 </Link>

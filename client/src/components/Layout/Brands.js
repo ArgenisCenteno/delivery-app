@@ -1,17 +1,30 @@
-import React from 'react' 
-import Carousel from 'react-multi-carousel'; 
-import Polar from "../Layout/img/polar.png"
-import Mary from "../Layout/img/mary-logo.png"
-import Cocacola from "../Layout/img/la-ola-de-cocacola.png"  
-import Plumrose from "../Layout/img/plumrose.svg";
-import Lucha from "../Layout/img/la-lucha-logo.png";
-import Alibal from "../Layout/img/alibal-logo.png" 
+import React, { useState, useEffect } from 'react' 
+import axios from "axios"
+import toast from 'react-hot-toast';
+import Carousel from 'react-multi-carousel';  
 import 'react-multi-carousel/lib/styles.css';
 import "../../styles/Brands.css"
 
 
 const Brands = () => {
 
+  const [categories, setCategories] = useState([])
+
+  const getAllCategory = async () => {
+    try {
+      const { data } = await axios.get("/api/v1/provider/get-provider");
+      if (data?.success) {
+        setCategories(data?.category);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Ha ocurrido un error al traer el proveedor");
+    }
+  };
+
+  useEffect(() => {
+    getAllCategory();
+  }, []);
    
     const responsive = {
         superLargeDesktop: { 
@@ -43,24 +56,15 @@ const Brands = () => {
                     <h2 className='text-danger'>Proveedores</h2>
                     <p>Conoce nuestros proveedores<br></br> .</p>
                     <Carousel responsive={responsive} infinite={true} className="owl-carousel owl-theme skill-slider">
-                        <div className="item">
-                            <img src={Polar} alt="Image" />
-                            <h5>Alimentos Polar</h5>
+                        {
+                           categories?.map((category, index) =>(
+                            <div className="item" key={index}>
+                            <img src={`/api/v1/provider/provider-photo/${category._id}`} alt={category.name}   />
+                            <h5>{category.nombre}</h5>
                         </div>
-                        <div className="item">
-                            <img src={Mary} alt="Image" />
-                            <h5>Alimentos Mary</h5>
-                        </div>  
-                        <div className="item "  >
-                            <img src={Cocacola} alt="Image" />
-                            <h5>Coca Cola</h5>
-                        </div>
-                         
-                        <div className="item">
-                            <img src={Alibal} alt="Image" />
-                            <h5>Alibal</h5>
-                        </div>
-                    
+                           ) )
+                        }
+                        
                     </Carousel>
                 </div>
             </div>

@@ -7,18 +7,14 @@ import Inventory2Icon from '@mui/icons-material/Inventory2';
 import CategoryIcon from '@mui/icons-material/Category';
 import LoyaltyIcon from '@mui/icons-material/Loyalty';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import OrderChart from "./OrderChart"; 
-import OrderDay from "./OrderDay";
-import { ProductSaleChart } from "./ProductSaleChart";
-import IncomeSaleChart from "./IncomeSaleChart";
+import OrderChart from "./OrderChart";  
 
 const AdminDashboard = () => {
   const [auth] = useAuth();
   const [totalProducts, setTotalProducts] = useState(0);
   const [totalOrders, setTotalOrders] = useState(0);
   const [totalCategories, setTotalCategories] = useState(0);
-  const [totalUsers, setTotalUsers] = useState(0);
-
+  const [totalUsers, setTotalUsers] = useState(0); 
   
 
   useEffect(() => {
@@ -51,9 +47,10 @@ const AdminDashboard = () => {
           <div className="col-md-3 ">
             <AdminMenu  />
           </div>
-          <div className="col-md-9 "> 
+         
+          <div className=" col-md-9 "> 
             <div className="row">
-              <div className="col-md-3 mt-3">
+               <div className="col-md-3 mt-3">
                 <div className="card" style={{border: "none", borderRadius: "12px"}}>
                   <div className="card-body bg-primary" style={{borderRadius: "12px"}}>
                     <h5 className="card-title text-white">Productos</h5>
@@ -108,7 +105,10 @@ const AdminDashboard = () => {
                 </div>
               </div>
               
-             
+              <div className="col-12"  >
+                  <OrderChart/>
+              </div>
+               
             </div>
            
            

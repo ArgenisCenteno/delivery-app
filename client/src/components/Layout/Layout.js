@@ -49,7 +49,7 @@ const Layout = ({ children, title, description, keywords, author }) => {
 };
 
 Layout.defaultProps = {
-  title: "Blanca Sánchez",
+  title: "De todo un poco Online",
   description: "Proyecto de Desarrollo Web",
   keywords: "React",
   author: "Grupo",

@@ -84,7 +84,7 @@ const Header = () => {
             <Link to={"/"} className="navbar-brand  title-header" style={{color: "white"}}>
                <img src={hella}  alt="logo-delivery" width="80px" height="80px" />
             {/*<img src={hella}  alt="logo-blanca" width="50px" height="50px" />*/}
-           Por todo delivery  
+            De todo un poco Online  
             </Link> 
              
             </div>

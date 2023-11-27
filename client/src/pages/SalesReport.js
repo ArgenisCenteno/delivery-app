@@ -10,6 +10,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import { Table, Select, Button  } from 'antd';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
+import OrderChart from './Admin/OrderChart';
 const { Option } = Select;
 
 const SalesReport = () => {
@@ -442,6 +443,7 @@ const SalesReport = () => {
           <div className="col-md-3">
             <AdminMenu />
           </div>
+         
          
           <div className="col-md-9 ">
           <h1 className='mt-4 mb-4'>Reporte de órdenes</h1>

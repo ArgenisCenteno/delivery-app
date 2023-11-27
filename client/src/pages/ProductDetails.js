@@ -76,7 +76,7 @@ const ProductDetails = () => {
   };
 
   return (
-    <Layout>
+    <Layout title="De todo un poco Online">
        <a href="https://api.whatsapp.com/send?phone=+51987654321" class="btn-wsp" target="_blank">
 	    <WhatsAppIcon style={{fontSize: "64px"}}/>
 	</a>
@@ -106,7 +106,8 @@ const ProductDetails = () => {
            
                
             <h2  text-muted>USD {product.precio}</h2>
-            <h3  text-muted>BS {product.precio * 35.53}</h3>
+            <h3  text-muted>BS {(product.precio * 3.53).toFixed(2)}
+</h3>
            
    
      <div className="col-6 col-sm-6 d-flex align-items-center mb-4">

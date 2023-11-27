@@ -121,7 +121,7 @@ const CartPage = () => {
   
   return (
     <Layout title={"Por todo delivery"} style={{ width: "100vw" }}>
-  <a href="https://api.whatsapp.com/send?phone=+51987654321" className="btn-wsp" target="_blank">
+  <a href="https://api.whatsapp.com/send?phone=+584249604445" className="btn-wsp" target="_blank">
     <WhatsAppIcon style={{ fontSize: "64px" }} />
   </a>
 

@@ -47,7 +47,7 @@ const Products = () => {
       const doc = new jsPDF();
       doc.text('Informe de Productos Más Vendidos', 10, 10);
   
-      const tableData = [];
+      const tableData = [];  
       let totalProfit = 0;
   
       // Itera a través de los datos de productos más vendidos
@@ -57,7 +57,7 @@ const Products = () => {
         const rowData = [
           product.nombre,
           product.venta,
-          ganancia = product.venta === 0 ? 0 : (product.precio - product.precioCompra) * product.venta
+          ganancia =  product.venta === 0 ? 0 : (product.precio - product.precioCompra) * product.venta 
         ];
         
         tableData.push(rowData);
@@ -136,7 +136,8 @@ const Products = () => {
       render: (_id, record) => (
         <>
         <p  >
-           {record.precio - record.precioCompra }
+        {(record.precio - record.precioCompra).toFixed(2)}
+
         </p>
         
         </>

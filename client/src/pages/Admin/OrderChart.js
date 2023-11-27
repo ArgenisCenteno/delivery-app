@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,9 +10,7 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import axios from 'axios';
+} from 'chart.js'; 
 
 const OrderChart = () => {
   ChartJS.register(
@@ -23,7 +23,69 @@ const OrderChart = () => {
     Legend
   );
 
-  const options = {
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get("/api/v1/auth/all-orders");
+        setOrders(response.data);
+      } catch (error) {
+        console.error("Error fetching orders:", error);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
+  const processOrdersForChart = () => {
+    const ordersByMonth = {};
+
+    orders.forEach((order) => {
+      const timestamp = new Date(order.createdAt);
+      const month = `${timestamp.getMonth() + 1}-${timestamp.getFullYear()}`;
+
+      if (!ordersByMonth[month]) {
+        ordersByMonth[month] = 0;
+      }
+
+      ordersByMonth[month] += order.total;
+    });
+
+    // Ordenar los meses de manera ascendente
+    const sortedMonths = Object.keys(ordersByMonth).sort();
+
+    const labels = sortedMonths.map((month) => {
+      // Obtener el nombre del mes en español
+      const monthNames = [
+        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+      ];
+      const [monthNumber, year] = month.split("-");
+      return `${monthNames[parseInt(monthNumber, 10) - 1]} ${year}`;
+    });
+
+    const data = sortedMonths.map((month) => ordersByMonth[month]);
+
+    return { labels, data };
+  };
+
+  const chartData = {
+    labels: processOrdersForChart().labels,
+    datasets: [
+      {
+        label: "Ordenes Mensuales", 
+        fill: true,
+        lineTension: 0.4,
+        backgroundColor: "rgba(75,192,192,0.2)", // Color de relleno más claro
+        borderColor: "rgba(75,192,192,1)",
+        data: processOrdersForChart().data, 
+        spanGaps: true,
+      },
+    ],
+  };
+
+  const chartOptions = {
     responsive: true,
     plugins: {
       legend: {
@@ -31,70 +93,15 @@ const OrderChart = () => {
       },
       title: {
         display: true,
-        text: 'Grafica de ordenes mensuales',
+        text: 'Gráfica de Órdenes Mensuales',
       },
     },
-  };
-
-  const [orderData, setOrderData] = useState([]);
-  const [labels, setLabels] = useState([]);
-  const [monthlySales, setMonthlySales] = useState([]);
-  const [totalSales, setTotalSales] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/api/v1/product/getFilterOrders/thisYear');
-        
-        const orders = response.data;
-
-        // Procesar los datos para obtener ventas mensuales
-        const monthlySalesData = new Array(12).fill(0);
-        const monthlyOrderCounts = new Array(12).fill(0);
-        const monthlyTotalSales = new Array(12).fill(0);
-
-        orders.forEach(order => {
-          const monthIndex = new Date(order.createdAt).getMonth();
-          monthlySalesData[monthIndex] += order.total;
-          monthlyOrderCounts[monthIndex]++;
-          monthlyTotalSales[monthIndex] += order.total;
-        });
-
-        const monthNames = [
-          'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-          'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-        ];
-
-        setLabels(monthNames);
-        setMonthlySales(monthlyOrderCounts);
-        setTotalSales(monthlyTotalSales);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const datasets = [
-    {
-      label: 'Ordenes Mensuales',
-      data: monthlySales,
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
    
-  ];
-
-  const data = {
-    labels,
-    datasets,
   };
 
   return (
     <div>
-      <h2>Ordenes Mensuales</h2>
-      <Line options={options} data={data} />
+       <Line    data={chartData} options={chartOptions} />
     </div>
   );
 };

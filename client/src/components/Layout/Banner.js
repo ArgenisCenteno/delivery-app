@@ -57,7 +57,7 @@ export const Banner = () => {
             <TrackVisibility>
               {({ isVisible }) =>
               <div className={isVisible ? "animate__animated animate__fadeIn" : ""}> 
-                <h1>{`Por todo delivery`}  <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Ofertas inimaginables", "Variedad de productos", "La mejor relacion calidad-precio en un solo lugar" ]'><span className="wrap text-danger">{text}</span></span></h1>
+                <h1>{` De todo un poco Online`}  <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Ofertas inimaginables", "Variedad de productos", "La mejor relacion calidad-precio en un solo lugar" ]'><span className="wrap text-danger">{text}</span></span></h1>
                   <p>Nuestro equipo está comprometido en ofrecer un servicio cordial y eficiente, asistiéndote en tu búsqueda de los mejores productos. Nuestro objetivo es simplificar tu experiencia de compra de alimentos,
                      proporcionándote exactamente lo que necesitas, justo cuando lo necesitas. 
                      </p>

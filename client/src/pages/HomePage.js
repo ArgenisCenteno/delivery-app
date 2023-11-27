@@ -68,7 +68,7 @@ const HomePage = () => {
   return (
     <>
       <Layout title={"Por todo Delivery"} >
-      <a href="https://api.whatsapp.com/send?phone=+51987654321" class="btn-wsp" target="_blank">
+      <a href="https://api.whatsapp.com/send?phone=+584249604445" class="btn-wsp" target="_blank">
 	    <WhatsAppIcon style={{fontSize: "64px"}}/>
 	</a>
        <Banner/>

@@ -34,28 +34,7 @@ const Categories = () => {
     getAllCategory();
   }, []);
 
-  const categoriesList = [
-    {
-      title: "Viveres",
-      description: "Arroz, pasta, granos, pan",
-      imgUrl: img1,
-    },
-    {
-      title: "Refrigerados",
-      description: "Carne, pollo, pescado, charcutería",
-      imgUrl: img2,
-    },
-    {
-      title: "Bebidas",
-      description: "Agua, refresco, jugos",
-      imgUrl: img4,
-    },
-    {
-      title: "Frutas y vegetales",
-      description: "Furtas, verduras, vegetales",
-      imgUrl: img3,
-    },
-  ];
+   
 
   return (
     <section className="project" id="proyectos">
